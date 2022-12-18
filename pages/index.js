@@ -1,12 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import Editor from '../components/Editor';
+import React, { useState, useEffect, useRef } from 'react';
+import dynamic from 'next/dynamic';
+// import Editor from '../components/Editor';
 
 // https://vimeo.com/306783762
 
 export default function Home() {
+  const Editor = dynamic(() => import('../components/Editor'), { ssr: false });
   const [editorLoaded, setEditorLoaded] = useState(false);
-  const [data, setData] = useState('');
+  const resultView = useRef(null);
 
+  const onClick = (str) => {
+    if (resultView.current) {
+      resultView.current.innerHTML = `<h2>html결과 view입니다</h2>${str}`;
+    }
+  };
   useEffect(() => {
     setEditorLoaded(true);
   }, []);
@@ -16,13 +23,10 @@ export default function Home() {
       <h1>ckEditor 5</h1>
       <Editor
         name="description"
-        onChange={(data) => {
-          setData(data);
-        }}
+        onClick={onClick}
         editorLoaded={editorLoaded}
       />
-
-      {data}
+      <div ref={resultView} />
     </div>
   );
 }

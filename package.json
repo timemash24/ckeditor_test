@@ -12,6 +12,7 @@
     "@ckeditor/ckeditor5-build-classic": "^35.4.0",
     "@ckeditor/ckeditor5-react": "^5.0.3",
     "@ckeditor/ckeditor5-upload": "^35.4.0",
+    "ckeditor5-custom-build": "file:ckeditor5",
     "next": "13.0.7",
     "react": "18.2.0",
     "react-dom": "18.2.0"

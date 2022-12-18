@@ -1,16 +1,11 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from 'ckeditor5-custom-build/build/ckeditor';
+// import ClassicEditor from '../ckeditor5/build/ckeditor';
+// import ClassicEditor from '../ckeditor5/build/ckeditor';
 
-function Editor({ onChange, editorLoaded, name, value }) {
-  const editorRef = useRef();
-  const { CKEditor, ClassicEditor } = editorRef.current || {};
-
-  useEffect(() => {
-    editorRef.current = {
-      CKEditor: require('@ckeditor/ckeditor5-react').CKEditor, // v3+
-      ClassicEditor: require('@ckeditor/ckeditor5-build-classic'),
-      ko: require('@ckeditor/ckeditor5-build-classic/build/translations/ko'),
-    };
-  }, []);
+function Editor({ onClick, editorLoaded, name, value }) {
+  const [test, setTest] = useState('');
 
   return (
     <div>
@@ -22,14 +17,18 @@ function Editor({ onChange, editorLoaded, name, value }) {
           data={value}
           onChange={(event, editor) => {
             const data = editor.getData();
-            // console.log({ event, editor, data });
-            onChange(data);
+            setTest(data);
           }}
-          config={{ language: 'ko' }}
+          config={{
+            mediaEmbed: {
+              previewsInData: true,
+            },
+          }}
         />
       ) : (
         <div>Editor loading</div>
       )}
+      <button onClick={() => onClick(test)}>전송</button>
     </div>
   );
 }
