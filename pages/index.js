@@ -22,7 +22,7 @@ export default function Home() {
         editorLoaded={editorLoaded}
       />
 
-      {JSON.stringify(data)}
+      {data}
     </div>
   );
 }

@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-// import 'ckeditor5-custom-build/build/translations/ko';
 
 function Editor({ onChange, editorLoaded, name, value }) {
   const editorRef = useRef();
@@ -23,7 +22,7 @@ function Editor({ onChange, editorLoaded, name, value }) {
           data={value}
           onChange={(event, editor) => {
             const data = editor.getData();
-            // console.log({ event, editor, data })
+            // console.log({ event, editor, data });
             onChange(data);
           }}
           config={{ language: 'ko' }}
